@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "47437038006",
+    "project_id": "random-video-call-92be4",
+    "storage_bucket": "random-video-call-92be4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47437038006:android:e4e2c7fad503ef2e0a8117",
+        "android_client_info": {
+          "package_name": "com.satyam.VideoCalling"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47437038006-1euu7ga3b3ed74vfua65bs7jnf7cnkkn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.satyam.VideoCalling",
+            "certificate_hash": "8c8b63f6f43173dc8673fd5e33effe887dbe3f59"
+          }
+        },
+        {
+          "client_id": "47437038006-2rhtoqcu0mvm16a9krnkbncdd6ahrgv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4tcvUgWZ8brVrk2EzQRhC0FzQz2VOEYc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47437038006-2rhtoqcu0mvm16a9krnkbncdd6ahrgv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
