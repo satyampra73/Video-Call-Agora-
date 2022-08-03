@@ -36,6 +36,7 @@ public class VideoChatViewActivity extends AppCompatActivity {
     // Permission WRITE_EXTERNAL_STORAGE is not mandatory
     // for Agora RTC SDK, just in case if you wanna save
     // logs to external sdcard.
+
     private static final String[] REQUESTED_PERMISSIONS = {
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.CAMERA,
@@ -63,6 +64,7 @@ public class VideoChatViewActivity extends AppCompatActivity {
      * Note that UI operations needs to be in UI thread because RTC
      * engine deals with the events in a separate thread.
      */
+
     private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() {
         /**
          * Occurs when the local user joins a specified channel.
@@ -242,20 +244,21 @@ public class VideoChatViewActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
-
         if (requestCode == PERMISSION_REQ_ID) {
-            if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
-                    grantResults[1] != PackageManager.PERMISSION_GRANTED ||
-                    grantResults[2] != PackageManager.PERMISSION_GRANTED) {
-                showLongToast("Need permissions " + Manifest.permission.RECORD_AUDIO +
-                        "/" + Manifest.permission.CAMERA + "/" + Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                finish();
-                return;
-            }
 
-            // Here we continue only if all permissions are granted.
-            // The permissions can also be granted in the system settings manually.
             initEngineAndJoinChannel();
+//            if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
+//                    grantResults[1] != PackageManager.PERMISSION_GRANTED ||
+//                    grantResults[2] != PackageManager.PERMISSION_GRANTED) {
+//                showLongToast("Need permissions " + Manifest.permission.RECORD_AUDIO +
+//                        "/" + Manifest.permission.CAMERA + "/" + Manifest.permission.WRITE_EXTERNAL_STORAGE);
+//                finish();
+//                return;
+//            }
+//
+//            // Here we continue only if all permissions are granted.
+//            // The permissions can also be granted in the system settings manually.
+//            initEngineAndJoinChannel();
         }
     }
 

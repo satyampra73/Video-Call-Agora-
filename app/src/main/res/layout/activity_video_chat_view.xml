@@ -10,15 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/remoteBackground">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/icon_padding">
+
             <ImageView
                 android:layout_width="@dimen/remote_back_icon_size"
                 android:layout_height="@dimen/remote_back_icon_size"
                 android:layout_centerInParent="true"
-                android:src="@drawable/icon_agora_largest"/>
+                android:src="@drawable/icon_agora_largest" />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/icon_padding"
@@ -93,7 +95,7 @@
         android:layout_width="@dimen/log_container_width"
         android:layout_height="@dimen/log_container_height"
         android:layout_above="@+id/control_panel"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin" />
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin" />
 </RelativeLayout>

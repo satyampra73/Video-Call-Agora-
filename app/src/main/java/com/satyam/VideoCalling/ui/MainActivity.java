@@ -27,6 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private MaterialButton startSearch;
     private MaterialButton btn_logout;
     private TextView tvUsername;
-    private FrameLayout frameLayout;
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firestore;
@@ -70,18 +71,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUi() {
-        frameLayout = findViewById(R.id.fl_adplaceholder);
         online_counter = findViewById(R.id.onlineCounter);
         btn_logout = findViewById(R.id.btn_logout);
         startSearch = findViewById(R.id.startSearch);
         tvUsername = findViewById(R.id.tv_username);
     }
 
-    private void loadAdPlaceholder() {
-        LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
-        View view = inflater.inflate(R.layout.native_ad_placeholder, frameLayout, false);
-        frameLayout.addView(view);
-    }
 
     private void setSearchingCounter() {
         firestore.collection(Constants.COLLECTION_SEARCHING)
@@ -195,9 +190,11 @@ public class MainActivity extends AppCompatActivity {
 
                             //update channel
                             HashMap<String, Object> updates = new HashMap<>();
+                            long currentTime = System.currentTimeMillis();
+                            String timeReal = setDate(currentTime);
                             updates.put("userId_2", MyApplication.getInstance().getFirebaseAuth().getCurrentUser().getUid());
                             updates.put("userName_2", MyApplication.getInstance().getSharedPrefManager().getUser().getUserName());
-                            updates.put("joined_at", System.currentTimeMillis());
+                            updates.put("joined_at", timeReal);
                             MyApplication.getInstance().getFirestore().collection(Constants.COLLECTION_CHANNELS).document(channelId)
                                     .update(updates)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -223,8 +220,10 @@ public class MainActivity extends AppCompatActivity {
                                     });
 
                         } else if (snapshots != null && snapshots.getDocuments().size() == 0) {
+                            long currentTime = System.currentTimeMillis();
+                            String timeReal = setDate(currentTime);
                             final HashMap<String, Object> channelData = new HashMap<>();
-                            channelData.put("created_at", System.currentTimeMillis());
+                            channelData.put("created_at", timeReal);
                             channelData.put("userId_1", MyApplication.getInstance().getFirebaseAuth().getCurrentUser().getUid());
                             channelData.put("userName_1", MyApplication.getInstance().getSharedPrefManager().getUser().getUserName());
                             channelData.put("userId_2", "");
@@ -239,8 +238,10 @@ public class MainActivity extends AppCompatActivity {
                                             channel_id = documentReference.getId();
 
                                             //Add to queue
+                                            long currentTime = System.currentTimeMillis();
+                                            String timeReal = setDate(currentTime);
                                             HashMap<String, Object> searchingData = new HashMap<>();
-                                            searchingData.put("timestamp", System.currentTimeMillis());
+                                            searchingData.put("timestamp",timeReal);
                                             searchingData.put("userId", MyApplication.getInstance().getFirebaseAuth().getCurrentUser().getUid());
                                             searchingData.put("channel", channel_id);
                                             MyApplication.getInstance().getFirestore().collection(Constants.COLLECTION_SEARCHING).document(MyApplication.getInstance().getFirebaseAuth().getCurrentUser().getUid())
@@ -295,4 +296,12 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
+
+    private static String setDate(long currentTime) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+        Date date = new Date(currentTime);
+        String time = simpleDateFormat.format(date);
+        return time;
+    }
+
 }

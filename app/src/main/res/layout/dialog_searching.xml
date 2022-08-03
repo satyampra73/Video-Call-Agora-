@@ -29,12 +29,12 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie2"
-        android:layout_marginTop="14dp"
         android:layout_width="match_parent"
         android:layout_height="240dp"
+        android:layout_marginTop="14dp"
         app:lottie_autoPlay="true"
         app:lottie_fileName="searching.json"
-        app:lottie_loop="true"/>
+        app:lottie_loop="true" />
 
     <TextView
         android:id="@+id/msg"
