@@ -2,9 +2,9 @@
     <string name="app_name">VideoCalling</string>
 
     <string name="agora_app_id">532b9bd60f884957b160197fcb4184cb</string>
+    <string name="agora_access_token">006532b9bd60f884957b160197fcb4184cbIACtUoshjb56OsivApoPolVdR6UX6WJjMsybfNKEXNHgWY9VeZ8AAAAAEABUJOp90m/rYgEAAQDSb+ti</string>
     <string name="admob_app_id">YOUR ADMOB ID</string>
     <string name="admob_unit_id">YOUR ADMOB UNIT ID</string>
-    <string name="agora_access_token">null</string>
     <string name="no_internet">NO INTERNET</string>
     <string name="no_inter_msg">Cannot perform the requested action without Internet Connection.</string>
     <string name="open_settings">Open Settings</string>

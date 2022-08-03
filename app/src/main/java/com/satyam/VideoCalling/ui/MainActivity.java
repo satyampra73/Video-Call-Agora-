@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     public static Dialog dialog;
     private static String channel_id = "";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -27,7 +27,7 @@ public class VideoChatViewActivity extends AppCompatActivity {
     private static final String TAG = VideoChatViewActivity.class.getSimpleName();
 
     private static final int PERMISSION_REQ_ID = 22;
-    private static String channelid = "";
+    private static String channelid = "start";
     private static String userId_1;
     private static String userId_2;
     private static String userName_1;
@@ -134,6 +134,7 @@ public class VideoChatViewActivity extends AppCompatActivity {
          *     USER_OFFLINE_DROPPED(1): The SDK timed out and the user dropped offline because no data packet was received within a certain period of time. If a user quits the call and the message is not passed to the SDK (due to an unreliable channel), the SDK assumes the user dropped offline.
          *     USER_OFFLINE_BECOME_AUDIENCE(2): (Live broadcast only.) The client role switched from the host to the audience.
          */
+
         @Override
         public void onUserOffline(final int uid, int reason) {
             runOnUiThread(new Runnable() {
@@ -196,7 +197,7 @@ public class VideoChatViewActivity extends AppCompatActivity {
         initUI();
 
 
-        channelid = getIntent().getExtras().getString("channel_id");
+        //channelid = getIntent().getExtras().getString("channel_id");
         userId_1 = getIntent().getExtras().getString("userId_1");
         userId_2 = getIntent().getExtras().getString("userId_2");
         userName_1 = getIntent().getExtras().getString("userName_1");
@@ -246,19 +247,18 @@ public class VideoChatViewActivity extends AppCompatActivity {
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSION_REQ_ID) {
 
+            if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
+                    grantResults[1] != PackageManager.PERMISSION_GRANTED ||
+                    grantResults[2] != PackageManager.PERMISSION_GRANTED) {
+                showLongToast("Need permissions " + Manifest.permission.RECORD_AUDIO +
+                        "/" + Manifest.permission.CAMERA + "/" + Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                finish();
+                return;
+            }
+
+            // Here we continue only if all permissions are granted.
+            // The permissions can also be granted in the system settings manually.
             initEngineAndJoinChannel();
-//            if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
-//                    grantResults[1] != PackageManager.PERMISSION_GRANTED ||
-//                    grantResults[2] != PackageManager.PERMISSION_GRANTED) {
-//                showLongToast("Need permissions " + Manifest.permission.RECORD_AUDIO +
-//                        "/" + Manifest.permission.CAMERA + "/" + Manifest.permission.WRITE_EXTERNAL_STORAGE);
-//                finish();
-//                return;
-//            }
-//
-//            // Here we continue only if all permissions are granted.
-//            // The permissions can also be granted in the system settings manually.
-//            initEngineAndJoinChannel();
         }
     }
 
@@ -329,7 +329,7 @@ public class VideoChatViewActivity extends AppCompatActivity {
         if (TextUtils.isEmpty(token) || TextUtils.equals(token, "#YOUR ACCESS TOKEN#")) {
             token = null; // default, no token
         }
-        mRtcEngine.joinChannel(null, channelid, "Extra Optional Data", 0);
+        mRtcEngine.joinChannel(token, channelid, "Extra Optional Data", 0);
     }
 
     @Override
